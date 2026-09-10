@@ -343,24 +343,6 @@ The test suite validates:
 
 ---
 
-## Resume & LinkedIn Highlights
-
-Looking to showcase this project on your LinkedIn profile or software engineering resume? Here are production-focused descriptions ready to use:
-
-### LinkedIn Project Description
-> **Relay — Real-Time Multi-Agent AI Evaluation Platform**
-> - Designed and built an asynchronous, cloud-native evaluation engine that audits conversation quality using a 5-node compiled **LangGraph** multi-agent pipeline.
-> - Engineered a non-blocking background queue with **FastAPI** and implemented real-time node state telemetry using **Server-Sent Events (SSE)**.
-> - Implemented a resilient dual-mode evaluation architecture supporting multi-provider LLM inference (OpenAI, Anthropic, Gemini) with zero-downtime deterministic lexical fallback scoring.
-> - Architected a multi-stage **Docker** build and **Kubernetes** manifests with rolling deployment strategies, health probes, and Nginx SSE ingress rules.
-> - Configured end-to-end **GitHub Actions** CI/CD pipelines for automated testing, bundle compilation, and container verification.
-
-### Resume Bullet Points
-- **AI Systems & Backend Engineering**: Architected an asynchronous AI evaluation platform with FastAPI, SQLAlchemy 2.0 Async, and LangGraph, decoupling evaluation execution from the request cycle with sub-second SSE streaming.
-- **Multi-Agent Orchestration**: Built a modular pipeline of specialist evaluators (Clarity, Actionability, Grounding) orchestrated into a single Pydantic v2 scorecard with automated lexical fallback resilience.
-- **Cloud-Native & DevOps**: Containerized the application via multi-stage Docker builds (reducing image size to slim runtime), authored Kubernetes manifests (Deployments, Services, ConfigMaps, Ingress), and set up GitHub Actions CI/CD with Render Blueprint deployment.
-
----
 
 ## License
 
