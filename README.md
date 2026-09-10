@@ -273,6 +273,8 @@ Relay includes a native `render.yaml` specification for automated zero-downtime 
 4. Connect your repository. Render automatically reads `render.yaml`, configures the Docker web service, attaches a 1GB persistent disk at `/app/data` for SQLite, and activates the `/api/health` monitoring probe.
 5. In the Render dashboard, supply your optional LLM API keys (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or `GOOGLE_API_KEY`).
 
+> 📖 **Full Endpoint & Deployment Directory**: See [DEPLOYMENT.md](DEPLOYMENT.md) for a comprehensive list of all production URLs, local service endpoints, curl verification steps, and automated CI/CD deploy hooks.
+
 ---
 
 ## API Reference
