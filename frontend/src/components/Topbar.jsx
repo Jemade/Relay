@@ -65,7 +65,6 @@ export function Topbar({
       </div>
 
       <div className="topbar-actions">
-        {/* Model-Neutral Live Engine Status Pill */}
         <button
           className="model-status-pill"
           onClick={() => { setStatusOpen(!statusOpen); setMoreOpen(false); }}
@@ -83,7 +82,6 @@ export function Topbar({
           </span>
         </button>
 
-        {/* Status Popover */}
         {statusOpen && (
           <div className="popover status-popover visible">
             <div className="engine-status-header">
@@ -137,7 +135,6 @@ export function Topbar({
           </div>
         )}
 
-        {/* More Button & Popover */}
         <button
           className="icon-button"
           onClick={() => { setMoreOpen(!moreOpen); setStatusOpen(false); }}

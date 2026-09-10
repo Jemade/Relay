@@ -7,7 +7,7 @@ export function StartupLoader({ onDone }) {
     const timer = setTimeout(() => {
       setDone(true)
       if (onDone) onDone()
-    }, 1200) // Smooth, pleasant 1.2s loader transition
+    }, 1200)
     return () => clearTimeout(timer)
   }, [onDone])
 

@@ -1,0 +1,25 @@
+name: Deploy Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-render:
+    name: Trigger Render Deployment
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Trigger Deploy Webhook
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$RENDER_DEPLOY_HOOK_URL" ]; then
+            echo "Triggering Render deploy webhook..."
+            curl -fsS -X POST "$RENDER_DEPLOY_HOOK_URL"
+            echo "Render deployment triggered successfully."
+          else
+            echo "No RENDER_DEPLOY_HOOK_URL configured. Skipping webhook trigger."
+          fi

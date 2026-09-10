@@ -9,15 +9,12 @@ class GradingState(TypedDict):
     parsed_turns: List[Dict[str, str]]
     rubric_criteria: List[str]
     
-    # Specialist agent reviews
     clarity_evaluation: Optional[Dict[str, Any]]
     actionability_evaluation: Optional[Dict[str, Any]]
     grounding_evaluation: Optional[Dict[str, Any]]
     
-    # Final consolidated scorecard
     final_scorecard: Optional[Dict[str, Any]]
     
-    # Graph execution tracking
     current_node: str
     status: str
     error: Optional[str]

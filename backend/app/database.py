@@ -2,14 +2,12 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import declarative_base
 from backend.app.config import settings
 
-# Handle postgres:// vs postgresql+asyncpg:// if needed (Supabase format)
 db_url = settings.database_url
 if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql+asyncpg://", 1)
 elif db_url.startswith("postgresql://") and not db_url.startswith("postgresql+asyncpg://"):
     db_url = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-# Connect args for sqlite (check_same_thread=False)
 connect_args = {}
 if "sqlite" in db_url:
     connect_args["check_same_thread"] = False

@@ -58,7 +58,6 @@ async def evaluate_transcript(
     await db.commit()
     await db.refresh(task)
 
-    # Run grading pipeline in background task
     background_tasks.add_task(
         run_grading_task,
         task_id=task.id,

@@ -1,15 +1,21 @@
+# Version Control
+.git
+.gitignore
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-backend/venv/
 backend/.venv/
-venv/
+backend/venv/
 .venv/
+venv/
 *.db
 .pytest_cache/
+.coverage
+htmlcov/
 .env
 
 # Node
@@ -17,7 +23,9 @@ frontend/node_modules/
 frontend/dist/
 .npm
 
-# System & IDE
+# IDE / OS
 .DS_Store
 .vscode/
 .idea/
+*.swp
+*.swo

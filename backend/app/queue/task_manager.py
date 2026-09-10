@@ -11,7 +11,6 @@ from backend.app.queue.broadcaster import broadcaster
 async def run_grading_task(task_id: str, thread_id: str | None, transcript: str, rubric_criteria: list[str] | None = None):
     """Executes the LangGraph multi-agent grading pipeline in the background off the request/response cycle."""
     async with AsyncSessionLocal() as session:
-        # Mark task as processing
         result = await session.execute(select(GradingTask).where(GradingTask.id == task_id))
         task = result.scalar_one_or_none()
         if not task:
@@ -64,7 +63,6 @@ async def run_grading_task(task_id: str, thread_id: str | None, transcript: str,
         if not final_sc_data:
             raise ValueError("Pipeline finished without producing a final scorecard")
 
-        # Persist completed task and structured scorecard
         async with AsyncSessionLocal() as session:
             res = await session.execute(select(GradingTask).where(GradingTask.id == task_id))
             t = res.scalar_one_or_none()
@@ -73,7 +71,6 @@ async def run_grading_task(task_id: str, thread_id: str | None, transcript: str,
                 t.current_node = "scorecard_synthesizer"
                 t.completed_at = datetime.now(timezone.utc)
 
-            # Insert or replace scorecard
             scorecard_entry = Scorecard(
                 task_id=task_id,
                 thread_id=thread_id,

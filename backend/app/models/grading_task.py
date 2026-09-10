@@ -14,7 +14,7 @@ class GradingTask(Base):
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     thread_id = Column(String(36), ForeignKey("threads.id", ondelete="SET NULL"), nullable=True, index=True)
-    status = Column(String(32), nullable=False, default="queued", index=True)  # queued, processing, completed, failed
+    status = Column(String(32), nullable=False, default="queued", index=True)
     current_node = Column(String(64), nullable=True)
     raw_transcript = Column(Text, nullable=False)
     created_at = Column(DateTime(timezone=True), default=utc_now)

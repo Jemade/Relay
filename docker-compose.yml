@@ -1,0 +1,46 @@
+services:
+  relay:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: relay-engine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DATABASE_URL=sqlite+aiosqlite:////app/data/relay.db
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - DEFAULT_PROVIDER=${DEFAULT_PROVIDER:-gemini}
+      - DEFAULT_MODEL=${DEFAULT_MODEL:-models/gemini-3.6-flash}
+    volumes:
+      - relay_data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Optional Postgres service for production parity testing:
+  # docker compose --profile with-postgres up
+  postgres:
+    image: postgres:16-alpine
+    container_name: relay-postgres
+    restart: unless-stopped
+    profiles:
+      - with-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: relay
+      POSTGRES_USER: relay
+      POSTGRES_PASSWORD: relaypassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  relay_data:
+  postgres_data:

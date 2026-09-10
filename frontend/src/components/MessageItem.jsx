@@ -113,7 +113,6 @@ function inlineMarkdown(text) {
 function parseErrorPayload(content) {
   if (typeof content !== 'string') return null
 
-  // 1. Check for JSON structured error
   const trimmed = content.trim()
   if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
     try {
@@ -128,11 +127,9 @@ function parseErrorPayload(content) {
         }
       }
     } catch {
-      // not JSON
     }
   }
 
-  // 2. Check for legacy/raw error strings from Google Gemini
   if (
     trimmed.startsWith('Error communicating with live model:') ||
     trimmed.includes('RESOURCE_EXHAUSTED') ||

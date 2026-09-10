@@ -55,7 +55,6 @@ async def test_grading_pipeline_api():
         task_id = task_data["task_id"]
         assert task_data["status"] == "queued"
 
-        # Poll for background task completion
         status_data = {}
         for _ in range(50):
             await asyncio.sleep(0.8)

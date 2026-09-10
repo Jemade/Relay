@@ -5,7 +5,6 @@ from typing import Dict, Set, Any
 
 class EventBroadcaster:
     def __init__(self):
-        # task_id -> set of asyncio.Queue
         self._subscribers: Dict[str, Set[asyncio.Queue]] = {}
         self._lock = asyncio.Lock()
 

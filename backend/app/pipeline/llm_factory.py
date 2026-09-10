@@ -20,7 +20,6 @@ class LLMFactory:
         custom_base = settings.custom_api_base or os.getenv("OPENAI_BASE_URL", None)
         custom_model = settings.custom_model_name
 
-        # Provider routing and fallback
         if custom_base and (settings.openai_api_key or settings.google_api_key):
             try:
                 from langchain_openai import ChatOpenAI

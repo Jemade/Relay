@@ -20,7 +20,7 @@ class GradingTaskResponse(BaseModel):
 class TaskStatusResponse(BaseModel):
     task_id: str
     thread_id: Optional[str] = None
-    status: str  # queued, processing, completed, failed
+    status: str
     current_node: Optional[str] = None
     created_at: datetime
     completed_at: Optional[datetime] = None

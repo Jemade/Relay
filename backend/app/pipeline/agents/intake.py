@@ -16,7 +16,6 @@ async def intake_node(state: GradingState) -> Dict[str, Any]:
     raw = state.get("raw_transcript", "")
     turns: List[Dict[str, str]] = []
 
-    # Try parsing as JSON array of message objects first
     try:
         parsed = json.loads(raw)
         if isinstance(parsed, list):
@@ -28,7 +27,6 @@ async def intake_node(state: GradingState) -> Dict[str, Any]:
     except Exception:
         pass
 
-    # If not JSON, parse plain text turns
     if not turns:
         lines = raw.strip().split("\n")
         current_role = "user"

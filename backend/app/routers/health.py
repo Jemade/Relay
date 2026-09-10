@@ -61,7 +61,6 @@ async def get_real_metrics(db: AsyncSession = Depends(get_db)):
     total_tokens = (await db.execute(select(func.coalesce(func.sum(Message.token_count), 0)))).scalar() or 0
     scorecards_count = (await db.execute(select(func.count(Scorecard.id)))).scalar() or 0
 
-    # Capacity threshold: 100,000 tokens
     capacity_limit = 100000
     capacity_used_pct = round(min(100.0, (total_tokens / capacity_limit) * 100), 1)
 
@@ -89,7 +88,6 @@ async def update_api_keys(payload: ApiKeysUpdate):
         settings.custom_model_name = payload.model.strip()
         os.environ["CUSTOM_MODEL_NAME"] = payload.model.strip()
 
-    # Auto-detect or explicit provider for any key
     if key:
         if payload.provider:
             prov = payload.provider.lower()

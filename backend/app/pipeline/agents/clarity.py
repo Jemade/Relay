@@ -27,7 +27,6 @@ async def clarity_agent_node(state: GradingState) -> Dict[str, Any]:
         except Exception as e:
             print(f"Warning: Live clarity evaluation failed, falling back to deterministic evaluator: {e}")
 
-    # Deterministic fallback evaluation based on lexical structure
     clarity_score = round(metrics["clarity_score"], 1)
     has_numbered_list = "1." in transcript or "2." in transcript
     has_bullets = "- " in transcript or "* " in transcript

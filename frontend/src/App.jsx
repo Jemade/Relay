@@ -55,14 +55,12 @@ export function App() {
     localStorage.setItem('relay_username', newName)
   }
 
-  // Load initial workspace state on mount
   useEffect(() => {
     loadThreads()
     loadMetrics()
     loadHealth()
     loadScorecards()
 
-    // Global shortcut listener
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()

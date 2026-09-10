@@ -58,7 +58,6 @@ async def synthesizer_node(state: GradingState) -> Dict[str, Any]:
         except Exception as e:
             print(f"Warning: Live synthesis failed, falling back to deterministic synthesizer: {e}")
 
-    # Deterministic fallback synthesis
     clarity_eval = SpecialistEvaluation(**clarity_raw) if clarity_raw else None
     action_eval = SpecialistEvaluation(**action_raw) if action_raw else None
     ground_eval = SpecialistEvaluation(**ground_raw) if ground_raw else None

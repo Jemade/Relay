@@ -26,7 +26,6 @@ async def test_langgraph_pipeline_execution():
     assert result["current_node"] == "scorecard_synthesizer"
     assert result["final_scorecard"] is not None
     
-    # Validate with Pydantic v2
     scorecard = FinalScorecardSchema.model_validate(result["final_scorecard"])
     assert 0.0 <= scorecard.overall_score <= 100.0
     assert scorecard.grade_letter in ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D", "F"]

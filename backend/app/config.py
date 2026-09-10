@@ -8,10 +8,8 @@ class Settings(BaseSettings):
     app_version: str = "2.0.0"
     debug: bool = False
 
-    # Database connection
     database_url: str = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./relay.db")
 
-    # AI engine credentials and provider configuration
     openai_api_key: Optional[str] = os.getenv("OPENAI_API_KEY", None)
     anthropic_api_key: Optional[str] = os.getenv("ANTHROPIC_API_KEY", None)
     google_api_key: Optional[str] = os.getenv(

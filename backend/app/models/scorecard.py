@@ -22,7 +22,6 @@ class Scorecard(Base):
     momentum_factor = Column(String(64), nullable=False)
     calm_index = Column(Float, nullable=False, default=100.0)
     
-    # Complete structured scorecard JSON (Pydantic v2 serialized schema)
     structured_json = Column(JSON, nullable=False)
     created_at = Column(DateTime(timezone=True), default=utc_now)
 

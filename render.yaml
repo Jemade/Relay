@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: relay
+    runtime: docker
+    plan: starter
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:////app/data/relay.db
+      - key: DEFAULT_PROVIDER
+        value: gemini
+      - key: DEFAULT_MODEL
+        value: models/gemini-3.6-flash
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+    disk:
+      name: relay-data
+      mountPath: /app/data
+      sizeGB: 1

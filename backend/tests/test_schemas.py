@@ -20,7 +20,7 @@ def test_rubric_item_invalid_score():
     with pytest.raises(ValidationError):
         RubricItemGrade(
             criterion="Test",
-            score=150.0,  # exceeds 100
+            score=150.0,
             reasoning="Invalid"
         )
 
