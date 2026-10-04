@@ -57,3 +57,9 @@ See [GitHub Actions](https://github.com/Jemade/Relay/actions) for configured che
 ## Current scope
 
 Rubric scores depend on the selected evaluator and input. Fallback results use heuristics. Evaluation work and SSE broadcasting run in the API process; the service does not provide a durable distributed worker queue.
+
+## Engineering and contribution guide
+
+Read the [engineering notes](docs/ENGINEERING.md) for implementation boundaries and verification commands, the [review checklist](docs/REVIEW_CHECKLIST.md) for evidence still required, and [CONTRIBUTING.md](CONTRIBUTING.md) to propose changes. Report vulnerabilities through [SECURITY.md](SECURITY.md).
+
+[![Repository hygiene](https://github.com/Jemade/Relay/actions/workflows/repository-hygiene.yml/badge.svg)](https://github.com/Jemade/Relay/actions/workflows/repository-hygiene.yml)
