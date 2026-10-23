@@ -1,14 +1,13 @@
 import os
+from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from sqlalchemy import select
 
 from backend.app.config import settings
-from backend.app.database import init_db, AsyncSessionLocal
-from backend.app.models.thread import Thread, Message
+from backend.app.database import init_db
 from backend.app.routers import threads_router, grading_router, health_router
 
 
@@ -37,15 +36,16 @@ app.include_router(health_router)
 app.include_router(threads_router)
 app.include_router(grading_router)
 
-dist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "dist")
+dist_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 if os.path.exists(dist_dir):
-    app.mount("/assets", StaticFiles(directory=os.path.join(dist_dir, "assets")), name="assets")
+    app.mount("/assets", StaticFiles(directory=str(dist_dir / "assets")), name="assets")
 
     @app.get("/{full_path:path}")
     async def serve_spa(full_path: str):
         if full_path.startswith("api/"):
             raise HTTPException(status_code=404, detail="Endpoint not found")
-        file_path = os.path.join(dist_dir, full_path)
-        if os.path.isfile(file_path):
-            return FileResponse(file_path)
-        return FileResponse(os.path.join(dist_dir, "index.html"))
+        # Resolve paths before serving files to prevent escaping the build directory.
+        candidate = (dist_dir / full_path).resolve()
+        if candidate.is_file() and candidate.is_relative_to(dist_dir.resolve()):
+            return FileResponse(candidate)
+        return FileResponse(dist_dir / "index.html")
